@@ -1,0 +1,219 @@
+/* Main app container styles */
+.app {
+  display: flex;
+  flex-direction: row;
+  height: 100vh; /* Full viewport height */
+  background-color: #202124; /* Dark background for the main container */
+  color: #e8eaed; /* Light text color for readability */
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Font styling */
+}
+
+/* Sidebar container (contains ChatSession and ChatList) */
+.sidebar {
+  width: 300px; /* Fixed width for the sidebar */
+  padding: 15px;
+  background-color: #2c2c2c; /* Darker background for the sidebar */
+  overflow-y: auto; /* Allow scrolling within the sidebar */
+  border-right: 1px solid #3c3c3c; /* Subtle border to separate sidebar from main chat */
+}
+
+/* Main chat container */
+.main-chat {
+  flex: 1; /* Expand to fill remaining space */
+  padding: 20px;
+  background-color: #1e1e1e; /* Dark background for chat area */
+  color: #e8eaed; /* Light text color */
+  display: flex;
+  flex-direction: column; /* Arrange children in a column */
+  border-left: 1px solid #3c3c3c; /* Subtle border to separate from sidebar */
+}
+
+/* Empty chat prompt */
+.empty-chat {
+  font-size: 1.2rem; /* Slightly larger font for emphasis */
+  color: #aaa; /* Lighter color for the text */
+  text-align: center; /* Center-align text */
+  padding: 20px;
+  border: 1px dashed #888; /* Dashed border style */
+  border-radius: 8px; /* Rounded corners */
+  background-color: #2c2c2c; /* Background for empty chat prompt */
+  width: 80%; /* Constrain width */
+  max-width: 600px; /* Maximum width */
+  margin: 0 auto; /* Center horizontally */
+}
+/* Chat session form container */
+.chat-session-form {
+  display: flex;
+  flex-direction: row; /* Align input and button in a row */
+  margin-bottom: 20px; /* Add some space below the form */
+  padding: 10px;
+  background-color: #2c2c2c; /* Dark background matching the sidebar */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Input field styling */
+.chat-session-form input {
+  flex: 1; /* Allow the input to grow and fill available space */
+  padding: 10px; /* Padding inside the input */
+  border: 1px solid #3c3c3c; /* Dark border */
+  border-radius: 4px; /* Slightly rounded corners */
+  background-color: #1e1e1e; /* Dark input background */
+  color: #e8eaed; /* Light text color */
+  margin-right: 10px; /* Space between input and button */
+  outline: none; /* Remove default outline */
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Font styling */
+}
+
+/* Button styling */
+.chat-session-form button {
+  padding: 10px 15px; /* Padding inside the button */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Slightly rounded corners */
+  background-color: #6b7075; /* Primary color for the button */
+  color: white; /* White text */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Font styling */
+}
+
+/* Button hover effect */
+.chat-session-form button:hover {
+  background-color: #676b70; /* Darker shade on hover */
+}
+/* Chat list container */
+.chat-list {
+  padding: 10px; /* Padding inside the chat list */
+  background-color: #2c2c2c; /* Background to match the sidebar */
+  max-height: calc(100vh - 100px); /* Restrict height to prevent overflow */
+  overflow-y: auto; /* Allow vertical scrolling if content exceeds max-height */
+  border-right: 1px solid #3c3c3c; /* Border for separation */
+}
+
+/* Individual chat session entry */
+.chat-session {
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center align items vertically */
+  justify-content: space-between; /* Space between title and delete button */
+  padding: 10px; /* Padding inside each session */
+  margin-bottom: 10px; /* Space between sessions */
+  background-color: #3c3c3c; /* Background color for the session */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Cursor pointer on hover */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+  color: #e8eaed; /* Text color */
+}
+
+/* Chat session hover effect */
+.chat-session:hover {
+  background-color: #4a4a4a; /* Slightly lighter background on hover */
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow effect */
+}
+
+/* Chat session title */
+.session-title {
+  flex-grow: 1; /* Allow title to take available space */
+  font-size: 1rem; /* Font size */
+  overflow: hidden; /* Prevent text overflow */
+  text-overflow: ellipsis; /* Add ellipsis for long titles */
+  white-space: nowrap; /* Keep text in a single line */
+}
+
+/* Delete button */
+.delete-button {
+  padding: 5px 10px; /* Padding inside the button */
+  margin-left: 10px; /* Space between title and button */
+  background-color: #1a1919; /* Red background for delete */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth transition */
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Font styling */
+}
+
+/* Delete button hover effect */
+.delete-button:hover {
+  background-color: #b71c1c; /* Darker red on hover */
+}
+/* Chat history container */
+.chat-history {
+  padding: 15px; /* Padding around the content */
+  background-color: #2c2c2c; /* Dark background color */
+  overflow-y: auto; /* Allow vertical scrolling if content exceeds the container */
+  max-height: calc(100vh - 100px); /* Restrict height to prevent overflow */
+  border-right: 1px solid #3c3c3c; /* Border for separation */
+}
+
+/* Individual chat session entry */
+.chat-session {
+  padding: 10px; /* Padding inside each session entry */
+  margin-bottom: 10px; /* Space between entries */
+  background-color: #3c3c3c; /* Background color for the session entry */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  color: #e8eaed; /* Light text color */
+}
+
+/* Chat session hover effect */
+.chat-session:hover {
+  background-color: #4a4a4a; /* Slightly lighter background on hover */
+}
+.file-upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: #1e1e1e; /* Dark background to match the theme */
+  cursor: pointer; /* Pointer cursor for the icon */
+}
+
+.upload-icon {
+  font-size: 24px; /* Size of the icon */
+  color: #e8eaed; /* Light color for the icon */
+  border: 2px solid #3c3c3c; /* Border around the icon */
+  border-radius: 50%; /* Round shape for the icon */
+  padding: 10px; /* Space inside the icon */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.upload-icon:hover {
+  background-color: #333; /* Darker background on hover */
+}
+
+.sidebar.open {
+  width: 300px; /* Width when open */
+}
+
+.sidebar.closed {
+  width: 20px; /* Width when closed */
+}
+.toggle-button {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 20px;
+  height: 20px;
+  background-color: #3c3c3c;
+  color: white;
+  /* border-radius: 50%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1;
+  border: none;
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.toggle-button:hover {
+  /* background-color: #050505; */
+  transform: scale(1.1);
+}
+
+.toggle-button .icon {
+  font-size: 20px; 
+  line-height: 1;
+}
