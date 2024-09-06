@@ -1,0 +1,20 @@
+.camera-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #000;
+    padding: 8px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.camera {
+    margin-top: 10px;
+}
+
+input[type="file"] {
+    display: block;
+    margin-top: 10px;
+}
