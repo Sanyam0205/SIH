@@ -11,7 +11,7 @@ from langchain.prompts import PromptTemplate
 
 import os
 
-# os.environ['OPENAI_API_KEY'] = " -- check slack -- "
+#os.environ['OPENAI_API_KEY'] = "--check slack --"
 
 
 
@@ -33,8 +33,6 @@ file_paths = [
 ]
 
 pages = load_documents(file_paths)
-
-
 text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=500,
     chunk_overlap=0,
@@ -54,6 +52,8 @@ template = '''
 Use the following context to answer the question at the end. Provide the answers in detail.
 If you don't know the answer, just say that you don't know. DO NOT try to make up an answer.
 
+Ensure that you filter out any inappropriate or offensive language in your response. Here's a list of words to avoid: {bad_words}
+
 {context}
 Question: {question}
 Answer:
@@ -69,8 +69,7 @@ client = OpenAI(
    
     api_key=os.environ.get("OPENAI_API_KEY"),
 )
-'''
-chat_completion = client.chat.completions.create(
+'''chat_completion = client.chat.completions.create(
     messages=[
         {
             "role": "user",
@@ -81,18 +80,53 @@ chat_completion = client.chat.completions.create(
 )'''
 QA_CHAIN_PROMPT = PromptTemplate(
     template=template,
-    input_variables=["question", "context"]
+    input_variables=["question", "context","bad_words"]
 )
+bad_words = [
+    # General Offensive Language
+    "fuck", "fucking", "shit", "asshole", "bitch", "bastard", "dick", "pussy", 
+    "cunt", "cock", "dildo", "slut", "whore", "crap", "piss", "damn", "hell", 
+    "jerk", "twat", "bollocks", "tosser", "wanker",
 
-def run_chat_completion(question, context):
+    # Racial Slurs
+    "nigger", "chink", "gook", "spic", "wetback", "beaner", "cracker", "honky", 
+    "paki", "gypsy", "coon", "jigaboo", "sandnigger", "kike",
+
+    # Sexual Orientation and Gender Identity Slurs
+    "faggot", "dyke", "tranny", "lesbo", "queer", "homo", "he-she", "shemale", "fudgepacker",
+
+    # Religious Offense
+    "infidel", "heathen", "blasphemy", "heretic", "jihadist", "terrorist", "zionist", 
+    "crusader", "taliban", "kafir",
+
+    # Derogatory Terms for Disabilities
+    "retard", "cripple", "lame", "dumb", "spaz", "idiot", "moron", "lunatic",
+
+    # Offensive Terms Regarding Appearance
+    "fat", "ugly", "lardass", "tubby", "beanpole", "midget", "dwarf", "four-eyes",
+
+    # Violent and Threatening Terms
+    "kill", "die", "murder", "rape", "shoot", "stab", "bomb", "suicide", "lynch", 
+    "execute", "terrorist", "massacre",
+
+    # Offensive Terms About Mental Health
+    "psycho", "nutjob", "crazy", "schizo", "maniac",
+
+    # Miscellaneous Offensive Terms
+    "garbage", "trash", "scum", "filth", "vermin", "loser", "scumbag", "degenerate", 
+    "dirtbag", "slimeball", "harlot", "low-life"
+]
+def run_chat_completion(question, context, bad_words):
     response = client.chat.completions.create(
-        model="gpt-4",  # Use a valid model
+        model="gpt-4",
         messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "system", "content": f"You are a helpful assistant. Ensure that the response filters out any offensive language using this list of words: {bad_words}."},
             {"role": "user", "content": f"Context: {context}\n\nQuestion: {question}"}
         ]
     )
     return response.choices[0].message.content
+
+
 #message = completion.choices[0].message.content
 
 def get_context_from_vectorstore(query):
@@ -104,6 +138,6 @@ def get_context_from_vectorstore(query):
 user_prompt = input("User: ")
 
 context = get_context_from_vectorstore(user_prompt)
-response = run_chat_completion(user_prompt, context)
+response = run_chat_completion(user_prompt, context,bad_words)
 
 print("Assistant:", response)
