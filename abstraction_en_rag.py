@@ -11,10 +11,10 @@ import openai
 
 app = Flask(__name__)
 
-# Set up OpenAI client
+
 client = openai.OpenAI()
 
-# List of bad words and related functions
+
 bad_words = [
     # General Offensive Language
     "fuck", "fucking", "shit", "asshole", "bitch", "bastard", "dick", "pussy", 
