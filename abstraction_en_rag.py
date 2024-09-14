@@ -51,7 +51,7 @@ def check_for_bad_words(user_input):
 
 def censor_bad_words(user_input):
     return bad_words_pattern.sub(lambda match: '*' * len(match.group()), user_input)
-
+# creating embedings of corpus
 class Ingestion:
     def __init__(self):
         self.text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=0)
@@ -69,7 +69,7 @@ class Ingestion:
 
     def create_embeddings(self, chunks: List[Dict]) -> List[List[float]]:
         return self.embedding.embed_documents([chunk.page_content for chunk in chunks])
-
+# storing embeds 
 class Storage:
     def __init__(self):
         self.vectorstore = None
@@ -79,7 +79,7 @@ class Storage:
 
     def similarity_search(self, query: str, k: int = 3) -> List[Dict]:
         return self.vectorstore.similarity_search(query, k=k)
-
+# the response 
 class Generator:
     def __init__(self, client, storage: Storage):
         self.client = client
@@ -131,7 +131,7 @@ ingestion = Ingestion()
 storage = Storage()
 generator = Generator(client, storage)
 
-# Load and process documents (this could be done during app initialization)
+# Load and process documents -  done during app initialization)
 file_paths = [
     "SIH/prd.pdf",
     "SIH/playbook.pdf",
